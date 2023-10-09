@@ -1,0 +1,220 @@
+/* Reset and Global Styles */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #646060;
+}
+
+/* Card Container */
+.card {
+  width: 300px;
+  height: 400px;
+  perspective: 1000px;
+  position: relative;
+  z-index: calc(var(--s) * 100);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+}
+
+.card:active,
+.card:hover {
+  transition: transform 0.1s ease;
+}
+
+/* Card Content */
+.content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: linear-gradient(90deg, #36D1DC, #5B86E5);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0px 0px 20px #fff;
+}
+
+.content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(var(--shimmer-angle, 90deg), transparent, rgba(255, 255, 255, 0.5), transparent);
+  opacity: var(--shimmer-opacity, 0);
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.3s ease, background 0.3s ease;
+  border-radius: 15px;
+}
+
+/* Banners */
+.top-banner,
+.bottom-banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 8px 0;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.top-banner {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.bottom-banner {
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+/* Text and Icons */
+.card-name,
+.card-type,
+.card-description,
+.card-attributes {
+  font-size: 12px;
+  text-align: center;
+  margin: 2px 0;
+  font-weight: lighter;
+  font-style: italic
+}
+
+.card-type {
+  font-size: 18px;
+  text-align: center;
+  margin: 2px 0;
+  font-weight:bolder;
+  font-style: bold;
+}
+
+.card-name {
+  font-size: 18px;
+  flex-grow: 1;
+  text-shadow: 0px 0px 5px #000, 0px 0px 10px #000;
+  font-family: 'IM FELL ENGLISH SC', serif;
+}
+
+.mana-cost,
+.set-symbol {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: white;
+  display: inline-block;
+  margin: 0 6px;
+}
+
+/* Artwork */
+.card-image {
+  position: relative;
+  border: 8px solid rgba(67, 120, 170, 0.6);
+  border-radius: 15px 50px;
+  box-shadow: 0px 0px 12px #000;
+  overflow: hidden;
+  width: 88%;
+  height: 80%;
+}
+
+.artwork,
+.artwork-bg,
+.artwork-base,
+.artwork-eyes,
+.artwork-gem {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* z-index for artwork layers */
+.artwork { z-index: 1; }
+.artwork-bg { z-index: 2; }
+.artwork-base { z-index: 3; }
+.artwork-eyes { z-index: 4; }
+.artwork-gem { z-index: 5; }
+
+
+/* ... Previous Styles ... */
+
+/* Gloss effect for artwork-bg */
+.artwork-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(145deg, transparent 40%, rgba(255, 255, 255, 0.8) 50%, transparent 60%);
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 6;
+  mix-blend-mode: overlay;
+}
+
+/* Shimmering glow for eyes */
+.artwork-eyes::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.8), rgba(0,0,0,0));
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 6;
+  mix-blend-mode: screen;
+  animation: eye-glow 2s infinite alternate;
+}
+
+@keyframes eye-glow {
+  from {
+    opacity: 0.6;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Sparkle shimmer for gem */
+.artwork-gem::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle, rgba(255,255,255,1), rgba(0,0,0,0)),
+              radial-gradient(circle, rgba(255,255,255,1), rgba(0,0,0,0)),
+              radial-gradient(circle, rgba(255,255,255,1), rgba(0,0,0,0));
+  background-size: 50% 50%, 30% 30%, 20% 20%;
+  background-position: 50% 50%, 30% 30%, 70% 70%;
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 6;
+  mix-blend-mode: screen;
+  animation: gem-sparkle 3s infinite alternate;
+}
+
+@keyframes gem-sparkle {
+  0% {
+    background-position: 50% 50%, 30% 30%, 70% 70%;
+  }
+  50% {
+    background-position: 30% 30%, 50% 50%, 30% 70%;
+  }
+  100% {
+    background-position: 70% 70%, 30% 30%, 50% 50%;
+  }
+}
